@@ -4,15 +4,16 @@ import Appbar from './components/Appbar'
 import Home from './pages/Home'
 import MyFood from './pages/MyFood'
 
-
 import './App.css'
 
 function App() {
   return (
     <BrowserRouter>
-      <div className="App">
-        <Appbar />
-        <div className="content">
+      <div className="app">
+        <div className="nav">
+          <Appbar />
+        </div>
+        <div>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/myfood" element={<MyFood />} />
