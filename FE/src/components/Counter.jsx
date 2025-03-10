@@ -1,10 +1,15 @@
+// FILE: Appbar.jsx
+// PROJECT: Advanced Web Frameworks - Group2
+// PROGRAMMER: Yujung Park
+// FIRST VERSION: 2025-03-09
+// DESCRIPTION: Test purpose
+// https://redux-toolkit.js.org/tutorials/quick-start
 import React from 'react'
-import type { RootState } from '../../store'
 import { useSelector, useDispatch } from 'react-redux'
-import { decrement, increment } from './counterSlice'
+import { decrement, increment } from '../reducers/counterSlice'
 
 export function Counter() {
-  const count = useSelector((state: RootState) => state.counter.value)
+  const count = useSelector((state) => state.counter.value)
   const dispatch = useDispatch()
 
   return (
@@ -27,5 +32,3 @@ export function Counter() {
     </div>
   )
 }
-
-export default Counter; 

@@ -1,6 +1,10 @@
-// https://www.material-tailwind.com/docs/html/card
+// FILE: FoodCard.jsx
+// PROJECT: Advanced Web Frameworks - Group2
+// PROGRAMMER: Yujung Park
+// FIRST VERSION: 2025-03-09
+// DESCRIPTION:
+// References: https://www.material-tailwind.com/docs/html/card
 import React from 'react'
-
 
 function FoodCard() {
   return (
