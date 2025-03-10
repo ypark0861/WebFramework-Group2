@@ -1,4 +1,9 @@
-// https://www.youtube.com/watch?v=aZGzwEjZrXc
+// FILE: Appbar.jsx
+// PROJECT: Advanced Web Frameworks - Group2
+// PROGRAMMER: Yujung Park
+// FIRST VERSION: 2025-03-05
+// DESCRIPTION:
+// REFRENCES: https://www.youtube.com/watch?v=aZGzwEjZrXc
 // https://flowbite.com/docs/components/navbar/
 
 import React from 'react'
@@ -29,10 +34,3 @@ const Appbar = () => {
 }
 
 export default Appbar;
-
-// <Link to="/">
-//               <div className="rounded-md bg-teal-400 px-3 py-2 text-sm font-medium text-slate-950 hover:bg-slate-300 hover:text-white" aria-current="page">Home</div>
-//               </Link>
-//               <Link to="/myfood">
-//               <div className="rounded-md bg-teal-400 px-3 py-2 text-sm font-medium text-slate-950 hover:bg-slate-300 hover:text-white">My Food</div>
-//               </Link>

@@ -1,11 +1,12 @@
+// FILE: counterSlice.jsx
+// PROJECT: Advanced Web Frameworks - Group2
+// PROGRAMMER: Yujung Park
+// FIRST VERSION: 2025-03-09
+// DESCRIPTION: Test purpose
+
 import { createSlice } from '@reduxjs/toolkit'
-import type { PayloadAction } from '@reduxjs/toolkit'
 
-export interface CounterState {
-  value: number,
-}
-
-const initialState: CounterState = {
+const initialState = {
   value: 0,
 }
 
@@ -19,13 +20,12 @@ export const counterSlice = createSlice({
     decrement: (state) => {
       state.value -= 1
     },
-    incrementByAmount: (state, action: PayloadAction<number>) => {
+    incrementByAmount: (state, action) => {
       state.value += action.payload
     },
   },
 })
 
-// Action creators are generated for each case reducer function
 export const { increment, decrement, incrementByAmount } = counterSlice.actions
 
 export default counterSlice.reducer
