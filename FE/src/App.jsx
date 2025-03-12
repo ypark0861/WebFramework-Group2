@@ -19,7 +19,7 @@ function App() {
         <div className="nav">
           <Appbar />
         </div>
-        <div>
+        <div className="page">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/myfood" element={<MyFood />} />

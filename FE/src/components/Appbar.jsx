@@ -15,7 +15,7 @@ const Appbar = () => {
       <nav className="navbar">
         <h1>HEALTHY CHOICES</h1>
         <div className="links">
-          <ul className="flex">
+          <ul className="flex text-slate-950">
             <Link to="/" aria-current="page">
             <li>
               Home
