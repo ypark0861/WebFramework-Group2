@@ -10,30 +10,57 @@ import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import './location.css';
 
-function location() {
+
+function Location() {
     const [address, setAddress] = useState("");
-    
-    const handleSelect = async value => {
-        const results = await geocodeByAddress(value);
-        const latLng = await getLatLng(results[0]);
-        console.log(results, latLng);
-    };
+    const [place, setPlace] = useState(null);
+    const handleChange = (address) => {
+        setAddress(address);
+    }
+const handleSelect = async (selectedAddress) => {
+        setAddress(selectedAddress);
+        try{
+            const results = await geocodeByAddress(selectedAddress);
+            const placeDetails = {
+                name: results[0].name,
+                address: results[0].formatted_address,
+                place_id: results[0].place_id,
+            };
+            setPlace(placeDetails);
+            console.log(placeDetails);
+        }catch(error) {
+            console.error('Error', error);
+        }
+    }
+
     
     return (
-        <div className= "Container">
-        <div calssName = "row">
-            <div className = "col-md-6">
-            <form className="form-inline">
-                <input
-                value={address}
-                onChange={setAddress}
-                placeholder="Enter your location"
-                />
-                <button type="submit" className="btn btn-primary">Submit</button>
-            </form>
-            </div>
-            <h1>React Application</h1>
-        </div>
-        </div>
-    );
+        <div className= "autocompolete-container">
+            <PlacesAutocomplete
+            value={address}
+            onChange={handleChange}
+            onSelect={handleSelect}
+            >
+            {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+                    <div>
+                        <input {...getInputProps({ placeholder: "Enter your location" })} />
+                        <div>
+                            {loading ? <div>...loading</div> : null}
+                            {suggestions.map((suggestion) => {
+                                const style = {
+                                    backgroundColor: suggestion.active ? "#41b6e6" : "#fff"
+                                };
+                                return (
+                                    <div {...getSuggestionItemProps(suggestion, { style })}>
+                                        {suggestion.description}
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </div>
+                )}
+            
+            </PlacesAutocomplete>
+            </dev>
+       );
     }
