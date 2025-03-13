@@ -1,9 +1,7 @@
 /**
  * Author: Elijah Atta-Konadu
- * Date: 03/13/2021
- * description: This is a react application that allows users to enter their location and submit it.
- * Following tutorial then editing afterwards.
- * https://www.youtube.com/watch?v=HslRpRQcH5M&t=230s&ab_channel=CodingShiksha
+ * Date: 03/13/2025
+ * description: Skeleton Complete
  */
 import placesAutocomplete from 'react-places-autocomplete';
 import React, { useState } from 'react';
@@ -41,17 +39,17 @@ const handleSelect = async (selectedAddress) => {
             onChange={handleChange}
             onSelect={handleSelect}
             >
-            {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+                {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
                     <div>
                         <input {...getInputProps({ placeholder: "Enter your location" })} />
-                        <div>
-                            {loading ? <div>...loading</div> : null}
+                        <div className="suggestions-container">
+                            {loading ? <div className="loading-indicator">...loading</div> : null}
                             {suggestions.map((suggestion) => {
                                 const style = {
                                     backgroundColor: suggestion.active ? "#41b6e6" : "#fff"
                                 };
                                 return (
-                                    <div {...getSuggestionItemProps(suggestion, { style })}>
+                                    <div {...getSuggestionItemProps(suggestion, { className: "suggestion-item", style })}>
                                         {suggestion.description}
                                     </div>
                                 );
@@ -59,7 +57,6 @@ const handleSelect = async (selectedAddress) => {
                         </div>
                     </div>
                 )}
-            
             </PlacesAutocomplete>
             </dev>
        );
