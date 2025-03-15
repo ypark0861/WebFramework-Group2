@@ -1,90 +1,83 @@
 /**
- * Author: Elijah Atta-Konadu
- * Date: 03/13/2025
- * Description: Skeleton Complete
- */
+Author: Elijah Atta-Konadu
+Date: 03-15-2025
+Description: Display results from search query
+**/
 
-import React, { useState } from 'react';
-import PlacesAutocomplete, { geocodeByAddress } from 'react-places-autocomplete';
-import './location.css';
 
-const Location = () => {
-    const [address, setAddress] = useState("");
-    const [place, setPlace] = useState(null);
 
-    const handleChange = (address) => {
-        setAddress(address);
-    };
 
-    const handleSelect = async (selectedAddress) => {
-        setAddress(selectedAddress);
-        try {
-            const results = await geocodeByAddress(selectedAddress);
-            const placeDetails = {
-                name: results[0].name,
-                address: results[0].formatted_address,
-                place_id: results[0].place_id,
-                geometry: results[0].geometry
-            };
-            setPlace(placeDetails);
-            console.log(placeDetails);
-        } catch (error) {
-            console.error('Error', error);
+import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom'; // To access the query parameter
+
+
+const SearchPlaces = () => {
+  const [results, setResults] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const location = useLocation();
+
+  const query = new URLSearchParams(location.search).get('query') || 'Healthy Food Waterloo, Ontario, Canada';
+
+  useEffect(() => {
+    const searchPlaces = async () => {
+      setLoading(true);
+      try {
+        const response = await fetch('https://places.googleapis.com/v1/places:searchText', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-Goog-Api-Key': 'AIzaSyA1w4LdRs6oVyXamfYxCca70sRpBgkgWrc',
+            'X-Goog-FieldMask': 'places.displayName',
+          },
+          body: JSON.stringify({
+            textQuery: query,
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
         }
+
+        const data = await response.json();
+        setResults(data);
+      } catch (error) {
+        console.error(error); 
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
     };
 
-    return (
-        <div className="autocomplete-container">
-            <PlacesAutocomplete
-                value={address}
-                onChange={handleChange}
-                onSelect={handleSelect}
-            >
-                {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-                    <div>
-                        <input
-                            {...getInputProps({
-                                placeholder: "Enter your location",
-                                className: "autocomplete-input"
-                            })}
-                        />
-                        <div className="autocomplete-dropdown">
-                            {loading && <div>Loading...</div>}
-                            {suggestions.map((suggestion) => (
-                                <div
-                                    key={suggestion.placeId}
-                                    {...getSuggestionItemProps(suggestion)}
-                                    className="suggestion-item"
-                                >
-                                    {suggestion.description}
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                )}
-            </PlacesAutocomplete>
-            {place && (
-                <div className="place-info">
-                    <h2>Address Details</h2>
-                    <p>
-                        <strong>Name:</strong> {place.name}
-                    </p>
-                    <p>
-                        <strong>Formatted Address:</strong> {place.address}
-                    </p>
-                    <p>
-                        <strong>Place ID:</strong> {place.place_id}
-                    </p>
-                    <p>
-                        <strong>Latitude:</strong> {place.geometry.location.lat()}
-                    </p>
-                    <p>
-                        <strong>Longitude:</strong> {place.geometry.location.lng()}
-                    </p>
-                </div>
-            )}
-        </div>
+    searchPlaces();
+  }, []);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error}</p>;
+
+  let content;
+  if (results) {
+    content = (
+      <ul>
+        {results.places.map((place, index) => {
+          return (
+            <li key={index}>
+              <h2>{place.displayName.text}</h2>
+            </li>
+          );
+        })}
+      </ul>
     );
+  } else {
+    content = <p>No results found.</p>;
+  }
+
+  return (
+    <div>
+      <h1>Search Results</h1>
+      {content}
+    </div>
+  );
 };
 
-export default Location;
+export default SearchPlaces;
