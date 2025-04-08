@@ -1,42 +1,21 @@
-// https://dev.to/cuongnp/swagger-nodejs-express-a-step-by-step-guide-4ob
 
-const express = require("express");
+import express from "express";
+// import cors from "cors";
+import hfood from "./routes/hfood.js";
+import dotenv from "dotenv";
+dotenv.config();
 
-const bodyParser = require("body-parser");
-const swaggerUi = require('swagger-ui-express');
-const swaggerJsDoc = require('swagger-jsdoc');
 
-const app = express()
-const port = process.env.PORT || 3000;
 
-// before listen function
-const swaggerOptions = {
-  swaggerDefinition: {
-    myapi: '3.0.0',
-    info: {
-      title: 'My API',
-      version: '1.0.0',
-      description: 'API documentation',
-    },
-    servers: [
-      {
-        url: 'http://localhost:3000',
-      },
-    ],
-  },
-  apis: ['./routes/*.js'], // files containing annotations as above
-};
+const PORT = process.env.PORT || 5050;
+const app = express();
 
-const swaggerDocs = swaggerJsDoc(swaggerOptions);
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+// app.use(cors());
+app.use(express.json());
+app.use("/hfood", hfood);
 
-// Sample route
-app.get('/api/hello', (req, res) => {
-  res.send('Hello World!');
+app.listen(PORT, () => {
+  console.log(`Server:${PORT}`);
 });
 
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
-});
-
-// app.use()
+export default app;
