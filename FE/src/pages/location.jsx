@@ -1,90 +1,80 @@
 /**
  * Author: Elijah Atta-Konadu
- * Date: 03/13/2025
- * Description: Skeleton Complete
+ * Date: 04/01/2025
+ * Description: v2
  */
 
-import React, { useState } from 'react';
-import PlacesAutocomplete, { geocodeByAddress } from 'react-places-autocomplete';
-import './location.css';
+import React, { useEffect, useState } from 'react';
+import './App.css';
 
-const Location = () => {
-    const [address, setAddress] = useState("");
-    const [place, setPlace] = useState(null);
+import SearchBar from './SearchBar'; // Import the SearchBar component
 
-    const handleChange = (address) => {
-        setAddress(address);
-    };
+const location = () => {
+    const [restaurant, setRestaurant] = useState([]);
+    const [loading, setLoading] = useState(true);
 
-    const handleSelect = async (selectedAddress) => {
-        setAddress(selectedAddress);
+    const handleSelect = async (city) => {
+        setLoading(true);
         try {
-            const results = await geocodeByAddress(selectedAddress);
-            const placeDetails = {
-                name: results[0].name,
-                address: results[0].formatted_address,
-                place_id: results[0].place_id,
-                geometry: results[0].geometry
-            };
-            setPlace(placeDetails);
-            console.log(placeDetails);
+            const response = await fetch(
+                `https://maps.googleapis.com/maps/api/place/textsearch/json?query=restaurants+in+${city}&key=AIzaSyAPn8OGmsNM2Z849m-Q_BWGLhxPJbmt6J0`
+            );
+    
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+    
+            const data = await response.json();
+            // Extract restaurant details from the API response
+            const restaurants = data.results.map((item) => ({
+                name: item.name,
+                address: item.formatted_address,
+                rating: item.rating,
+            }));
+    
+            setRestaurant(restaurants); // Update the state with the list of restaurants
+            setLoading(false);
         } catch (error) {
-            console.error('Error', error);
+            console.error("Error fetching data: ", error.message);
+            setLoading(false);
         }
     };
 
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch('https://maps.googleapis.com/maps/api/place/textsearch/json?query=restaurants+in+${city}&key=AIzaSyAPn8OGmsNM2Z849m-Q_BWGLhxPJbmt6J0'); // Replace with your actual API endpoint
+                const data = await response.json();
+                setRestaurant(data.restaurants || []); // Adjust based on API response structure
+                setLoading(false);
+            } catch (error) {
+                console.error("Error fetching data: ", error);
+                setLoading(false);
+            }
+        };
+
+        fetchData();
+    }, []);
+
     return (
-        <div className="autocomplete-container">
-            <PlacesAutocomplete
-                value={address}
-                onChange={handleChange}
-                onSelect={handleSelect}
-            >
-                {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-                    <div>
-                        <input
-                            {...getInputProps({
-                                placeholder: "Enter your location",
-                                className: "autocomplete-input"
-                            })}
-                        />
-                        <div className="autocomplete-dropdown">
-                            {loading && <div>Loading...</div>}
-                            {suggestions.map((suggestion) => (
-                                <div
-                                    key={suggestion.placeId}
-                                    {...getSuggestionItemProps(suggestion)}
-                                    className="suggestion-item"
-                                >
-                                    {suggestion.description}
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                )}
-            </PlacesAutocomplete>
-            {place && (
-                <div className="place-info">
-                    <h2>Address Details</h2>
-                    <p>
-                        <strong>Name:</strong> {place.name}
-                    </p>
-                    <p>
-                        <strong>Formatted Address:</strong> {place.address}
-                    </p>
-                    <p>
-                        <strong>Place ID:</strong> {place.place_id}
-                    </p>
-                    <p>
-                        <strong>Latitude:</strong> {place.geometry.location.lat()}
-                    </p>
-                    <p>
-                        <strong>Longitude:</strong> {place.geometry.location.lng()}
-                    </p>
-                </div>
+        <div>
+            <h1>Restaurant Finder</h1>
+            <SearchBar onSearch={handleSelect} /> {/* Pass handleSelect to SearchBar */}
+            {loading ? (
+                <p>Loading...</p>
+            ) : (
+                <ul>
+                    {restaurant.map((item, index) => (
+                        <li key={index}>
+                            <h2>{item.name}</h2>
+                            <p>{item.address}</p>
+                            <p>Rating: {item.rating}</p>
+                        </li>
+                    ))}
+                </ul>
             )}
         </div>
     );
 };
 
-export default Location;
+export default location;
