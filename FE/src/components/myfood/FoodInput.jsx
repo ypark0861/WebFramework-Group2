@@ -36,10 +36,9 @@ export const FoodInput = () => {
               nutrition: data,
             })
           );
-      })
+        })
       }
-    }
-    )
+    })
     .catch(error => console.error(error.message)); 
    
     // dispatch(
