@@ -10,18 +10,19 @@ import{ React } from 'react'
 // import { Counter } from '../reducers/Counter'
 import FoodInput from '../components/myfood/FoodInput';
 import FoodMenuList from '../components/myfood/FoodMenuList';
+import FoodCalrorie from '../components/myfood/FoodCalorie';
+
 
 const MyFood = () => {
   return (
-    <div className="myfood-container">
-      <h1 className="text-4xl text-slate-950">My Food Checker</h1>
-      <div className="myfood-grid-contianer text-slate-950">
-        <FoodInput />
+    <div className="flex flex-col items-center">
+      <h1 className="text-3xl text-slate-800 p-4">MY FOOD CHECKER</h1>
+      <div className="bg-gray-100 p-4 mt-5 mb-5">
+        <FoodInput /> 
+        <FoodCalrorie />
         <FoodMenuList />
-        {/* <Counter /> */}
       </div>
     </div>
   )
 }
-
 export default MyFood
