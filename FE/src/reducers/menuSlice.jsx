@@ -42,8 +42,12 @@ const menuSlice = createSlice({
         item.id === action.payload.id ? { ...item, menu: action.payload.menu } : item
       );
     },
+    deleteAllMenu: (state, action) => {
+      state.allMenus = [];
+      state.allNutrition.calories = 0.0; 
+    }
   },
 });
 
-export const { addMenu, deleteMenu, editMenu } = menuSlice.actions;
+export const { addMenu, deleteMenu, editMenu, deleteAllMenu } = menuSlice.actions;
 export default menuSlice.reducer

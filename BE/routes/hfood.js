@@ -84,4 +84,37 @@ router.get("/food_nutrition/:food_name", async (req, res) => {
 });
 
 
+// user email, caloriechedckingeventid/timestamp, menu, quantity, netritionobject_id 
+// https://www.mongodb.com/docs/drivers/node/current/usage-examples/insertMany/
+router.post("/newcalcheck", async (req, res) => {
+  try {
+    const menus = [];
+    const nutrition_id = "";
+    const menu_name = "";
+    const quantity = 0;
+    // console.log(req.body.menus);
+    req.body.menus.forEach((menu) => {
+      console.log(menu);
+      menus.push({
+        nutrition_id: menu.nutrition_id,
+        menu_name: menu.menu_name,
+        quantity: menu.quantity,
+      });
+    });
+    let newCalCheck = {
+      user_email: req.body.user_email,
+      // calcheck_id: req.body.calcheck_id,
+      menu: menus,
+      date: new Date(),
+    };
+
+    let collection = await db.collection("calchecks");
+    let result = await collection.insertOne(newCalCheck);
+    res.send(result).status(200);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error-creating a new calcheck");
+  }
+});
+
 export default router;

@@ -2,7 +2,9 @@
 // PROJECT: Advanced Web Frameworks - Group2
 // PROGRAMMER: Yujung Park
 // FIRST VERSION: 2025-04-11
-// DESCRIPTION: 
+// DESCRIPTION:
+// REFERENCES: https://react.dev/reference/react-dom/components/input
+// https://thepriyammondal.medium.com/simplifying-state-management-with-redux-toolkit-a-comprehensive-guide-8cc3ef72a13
 
 import React from 'react'
 import { useSelector } from "react-redux";

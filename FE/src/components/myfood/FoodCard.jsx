@@ -4,6 +4,9 @@
 // FIRST VERSION: 2025-03-09
 // DESCRIPTION:
 // References: https://www.material-tailwind.com/docs/html/card
+// REFERENCES: https://react.dev/reference/react-dom/components/input
+// https://thepriyammondal.medium.com/simplifying-state-management-with-redux-toolkit-a-comprehensive-guide-8cc3ef72a13
+
 import React from 'react';
 import { useDispatch } from 'react-redux'
 import { deleteMenu } from '../../reducers/menuSlice'

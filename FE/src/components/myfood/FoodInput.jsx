@@ -40,14 +40,9 @@ export const FoodInput = () => {
       }
     })
     .catch(error => console.error(error.message)); 
-   
-    // dispatch(
-    //   addMenu({
-    //     id: new Date().getTime(),
-    //     menu: menuitem,
-    //     quanty: qtyAsNumber,
-    //   })
-    // );
+    
+    setMenuitem('');
+    setItemqty('0');
 
     console.log(data)
   }
