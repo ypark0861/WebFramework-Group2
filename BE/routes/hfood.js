@@ -30,8 +30,9 @@ router.get("/food_nutrition/:food_name", async (req, res) => {
       // console.log(query);
       let result = await collection.findOne(query);
       response = result;
-      // console.log(result);
-      if (!result) {
+      console.log(result);
+      // not in db or wrong food name
+      if (result === null) {
         axios.get(`https://api.calorieninjas.com/v1/nutrition?query=${req.params.food_name}`,
           {
             headers: {
@@ -40,8 +41,11 @@ router.get("/food_nutrition/:food_name", async (req, res) => {
           }
         )
         .then(food_res => {
+          if (food_res.data.items[0] === undefined) {
+            res.send("no food api data").status(404);
+          } 
+          else {
           const food_nutrition = food_res.data.items[0];
-          // console.log(food_nutrition);
           let newNutrition = {
             name: food_nutrition.name,
             calories: food_nutrition.calories,
@@ -63,15 +67,15 @@ router.get("/food_nutrition/:food_name", async (req, res) => {
           }
           else {
             res.send(response).status(200);
-          }  
-          
+          } 
+        }  
         })
-      }
-      else{
+      } else {
+        let result = await collection.findOne(query);
+        response = result;
         console.log("found nutrition from db");
         res.send(response).status(200);
       }
-      
     }
   } catch (err) {
     console.error(err);
