@@ -4,33 +4,80 @@
 // FIRST VERSION: 2025-03-09
 // DESCRIPTION:
 // References: https://www.material-tailwind.com/docs/html/card
-import React from 'react'
+// REFERENCES: https://react.dev/reference/react-dom/components/input
+// https://thepriyammondal.medium.com/simplifying-state-management-with-redux-toolkit-a-comprehensive-guide-8cc3ef72a13
 
-function FoodCard() {
+import React from 'react';
+import { useDispatch } from 'react-redux'
+import { deleteMenu } from '../../reducers/menuSlice'
+
+function FoodCard(props) {
+  const dispatch = useDispatch();
+  // console.log(props);
+
+  const removeFoodItem = () => {
+    dispatch(deleteMenu(props.item));
+  }
+
   return (
-    <div className="menu-card flex flex-row my-6 bg-white shadow-sm rounded-sm">
-      <div class="menucard-container flex flex-row">
-        <div className="relative m-2.5 overflow-hidden text-white rounded-md">
-        {/* <img src="https://images.unsplash.com/photo-1540553016722-983e48a2cd10?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=100&amp;&amp;q=80" alt="card-image" /> */}
-        </div>
-        <div className="">
-        <div className="p-4 float-left">
-          <h6 className="mb-2 text-slate-800 text-lg font-semibold">
-            Nutrition
-          </h6>
-          <p className="text-slate-600 leading-normal font-light">
-            nutrition...
-          </p>
-        </div>
-        <div className="p-4 float-right">
-          <button className="rounded-md py-2 px-4 text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button">
-            Delete
-          </button>
+      <div className="relative flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-72 md:w-96 lg:w-96 xl:w-96 mx-auto">
+        <div className="mb-8">
+        <div className="relative text-gray-900 font-bold text-xl py-3">{props.item.menu.toUpperCase()}</div>
+        <button className="rounded-full w-14 h-6 bg-red-500 text-white text-xs" onClick={removeFoodItem}> DELETE </button>
+        <table className="w-full min-w-max table-auto text-left">
+          <thead>
+            <tr>
+              <th className="px-4 py-2"> </th>
+              <th className="px-4 py-2"> </th>
+              <th className="px-4 py-2"> </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr className="bg-gray-100">
+              <td className="px-4 py-2">Calories</td>
+              <td className="px-4 py-2">{props.item.nutrition?.calories}</td>
+              <td className="px-4 py-2">kcal</td>
+            </tr>
+            <tr>
+              <td className="px-4 py-2">Carbohydrates</td>
+              <td className="px-4 py-2">{props.item.nutrition?.carbohydrates_total_g}</td>
+              <td className="px-4 py-2">g</td>
+            </tr>
+            <tr className="bg-gray-100">
+              <td className="px-4 py-2">Cholesterol</td>
+              <td className="px-4 py-2">{props.item.nutrition?.cholesterol_mg}</td>
+              <td className="px-4 py-2">mg</td>
+            </tr>
+            <tr>
+              <td className="px-4 py-2">Fat</td>
+              <td className="px-4 py-2">{props.item.nutrition?.fat_total_g}</td>
+              <td className="px-4 py-2">g</td>
+            </tr>
+            <tr className="bg-gray-100">
+              <td className="px-4 py-2">Fiber</td>
+              <td className="px-4 py-2">{props.item.nutrition?.fiber_g}</td>
+              <td className="px-4 py-2">g</td>
+            </tr>
+            <tr>
+              <td className="px-4 py-2">Protein</td>
+              <td className="px-4 py-2">{props.item.nutrition?.protein_g}</td>
+              <td className="px-4 py-2">g</td>
+            </tr>
+            <tr className="bg-gray-100">
+              <td className="px-4 py-2">Sodium</td>
+              <td className="px-4 py-2">{props.item.nutrition?.sodium_mg}</td>
+              <td className="px-4 py-2">mg</td>
+            </tr>
+            <tr>
+              <td className="px-4 py-2">Sugar</td>
+              <td className="px-4 py-2">{props.item.nutrition?.sugar_g}</td>
+              <td className="px-4 py-2">g</td>
+            </tr>
+          </tbody>
+        </table>
         </div>
       </div>
-    </div>
-  </div>  
-  )
+  );
 }
 
 export default FoodCard

@@ -9,6 +9,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Appbar from './components/Appbar'
 import Home from './pages/Home'
 import MyFood from './pages/MyFood'
+import MyList from './pages/MyList'
 
 import './App.css'
 
@@ -23,6 +24,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/myfood" element={<MyFood />} />
+          <Route path="/mylist" element={<MyList />} />
         </Routes>
         </div>
       </div>
