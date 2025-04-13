@@ -117,4 +117,17 @@ router.post("/newcalcheck", async (req, res) => {
   }
 });
 
+router.get("/calcheckbyuser/:id", async (req, res) => {
+  try {
+    let collection = await db.collection("calchecks");
+    let query = { user_email: req.params.id };
+    let result = await collection.find(query).toArray();
+    if (!result) res.send("Not found").status(404);
+    else res.send(result).status(200);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error-getting calchecks with email");
+  }
+});
+
 export default router;

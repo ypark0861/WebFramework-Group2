@@ -15,12 +15,11 @@ function FoodMenuList() {
   const dispatch = useDispatch();
   const menulist = useSelector((state) => state.menus.allMenus);
   // console.log(menulist)
-  const listItems = menulist.map(item =>
-    <li key={item.id}> 
-    {/* {item.menu}  */}
-    <FoodCard item={item} />
-    </li>
-    );
+  // const listItems = menulist.map(item =>
+  // <li key={item.id}> 
+  // <FoodCard item={item} />
+  // </li>
+  // );
 
   const saveFoodList = () => {
     console.log("save food list");
@@ -77,7 +76,11 @@ function FoodMenuList() {
         </div>
         <div className="">
           <ul className="relative flex flex-row mx-auto gap-4 flex-wrap list-none p-4">
-            {listItems}
+            {menulist.map((item) => (
+              <li key={item.id}> 
+              <FoodCard item={item} />
+              </li>
+            ))}
           </ul>
         </div>
       </div>
