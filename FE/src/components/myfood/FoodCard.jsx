@@ -4,6 +4,9 @@
 // FIRST VERSION: 2025-03-09
 // DESCRIPTION:
 // References: https://www.material-tailwind.com/docs/html/card
+// REFERENCES: https://react.dev/reference/react-dom/components/input
+// https://thepriyammondal.medium.com/simplifying-state-management-with-redux-toolkit-a-comprehensive-guide-8cc3ef72a13
+
 import React from 'react';
 import { useDispatch } from 'react-redux'
 import { deleteMenu } from '../../reducers/menuSlice'
@@ -20,7 +23,7 @@ function FoodCard(props) {
       <div className="relative flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-72 md:w-96 lg:w-96 xl:w-96 mx-auto">
         <div className="mb-8">
         <div className="relative text-gray-900 font-bold text-xl py-3">{props.item.menu.toUpperCase()}</div>
-        <button type="submit" className="rounded-full w-14 h-6 bg-red-500 text-white text-xs" onClick={removeFoodItem}> DELETE </button>
+        <button className="rounded-full w-14 h-6 bg-red-500 text-white text-xs" onClick={removeFoodItem}> DELETE </button>
         <table className="w-full min-w-max table-auto text-left">
           <thead>
             <tr>

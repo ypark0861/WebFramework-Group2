@@ -10,7 +10,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 const Appbar = () => {
-    return (
+  return (
     <section>
       <nav className="navbar">
         <h1>HEALTHY CHOICES</h1>
@@ -24,6 +24,11 @@ const Appbar = () => {
             <Link to="/myfood">
             <li>
               My Food
+            </li>
+            </Link>
+            <Link to="/mylist">
+            <li>
+              My List
             </li>
             </Link>
           </ul>

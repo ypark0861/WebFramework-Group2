@@ -15,6 +15,7 @@ const menuSlice = createSlice({
     allNutrition: {
       calories: 0.0,
     },
+    savedMenuList: []
   },
   reducers: {
     addMenu: (state, action) => {
@@ -35,15 +36,21 @@ const menuSlice = createSlice({
       if (deleteMenu !== -1) {
         state.allMenus.splice(index, 1);
       }
-
     },
     editMenu: (state, action) => {
       state.allMenu = state.allMenu.map((item) =>
         item.id === action.payload.id ? { ...item, menu: action.payload.menu } : item
       );
     },
+    deleteAllMenu: (state, action) => {
+      state.allMenus = [];
+      state.allNutrition.calories = 0.0; 
+    },
+    addSavedMenuList: (state, action) => {
+      state.savedMenuList = action.payload;
+    },
   },
 });
 
-export const { addMenu, deleteMenu, editMenu } = menuSlice.actions;
+export const { addMenu, deleteMenu, editMenu, deleteAllMenu, addSavedMenuList } = menuSlice.actions;
 export default menuSlice.reducer

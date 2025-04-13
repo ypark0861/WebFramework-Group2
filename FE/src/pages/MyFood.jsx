@@ -7,7 +7,6 @@
 // https://thepriyammondal.medium.com/simplifying-state-management-with-redux-toolkit-a-comprehensive-guide-8cc3ef72a13
 
 import{ React } from 'react'
-// import { Counter } from '../reducers/Counter'
 import FoodInput from '../components/myfood/FoodInput';
 import FoodMenuList from '../components/myfood/FoodMenuList';
 import FoodCalrorie from '../components/myfood/FoodCalorie';
