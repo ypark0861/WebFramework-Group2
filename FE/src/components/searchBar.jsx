@@ -4,29 +4,25 @@ Elijah Atta-Konadu
 import React, { useState } from 'react';
 
 const SearchBar = ({ onSearch }) => {
-    const [query, setQuery] = useState('');
+    const [city, setCity] = useState('');
 
-    const handleInputChange = (e) => {
-        setQuery(e.target.value);
-    };
-
-    const handleSearch = () => {
-        onSearch(query);
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (city.trim()) {
+            onSearch(city);
+        }
     };
 
     return (
-        <div style={{ margin: '20px' }}>
+        <form onSubmit={handleSubmit} className="search-bar">
             <input
                 type="text"
-                placeholder="Search for Resturants..."
-                value={query}
-                onChange={handleInputChange}
-                style={{ padding: '8px', width: '200px' }}
+                placeholder="Enter a city"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
             />
-            <button onClick={handleSearch} style={{ padding: '8px 12px', marginLeft: '10px' }}>
-                Search
-            </button>
-        </div>
+            <button type="submit">Search</button>
+        </form>
     );
 };
 
