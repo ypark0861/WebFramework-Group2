@@ -103,8 +103,8 @@ router.post("/newcalcheck", async (req, res) => {
     });
     let newCalCheck = {
       user_email: req.body.user_email,
-      // calcheck_id: req.body.calcheck_id,
       menu: menus,
+      calories: req.body.calories,
       date: new Date(),
     };
 
@@ -127,6 +127,20 @@ router.get("/calcheckbyuser/:id", async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).send("Error-getting calchecks with email");
+  }
+});
+
+
+router.delete("/deletecalcheck/:id", async (req, res) => {
+  try {
+    const query = { _id: new ObjectId(req.params.id) };
+    const collection = db.collection("calchecks");
+    let result = await collection.deleteOne(query);
+
+    res.send(result).status(200);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error-deleting the post");
   }
 });
 

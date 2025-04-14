@@ -14,6 +14,9 @@ function FoodMenuList() {
   const url = 'http://localhost:8080/hfood';
   const dispatch = useDispatch();
   const menulist = useSelector((state) => state.menus.allMenus);
+  const theuser = useSelector((state) => state.users.user);
+  const calories = useSelector((state) => state.menus.allNutrition);
+
   // console.log(menulist)
   // const listItems = menulist.map(item =>
   // <li key={item.id}> 
@@ -41,13 +44,14 @@ function FoodMenuList() {
       menu_array.push({
         nutrition_id: item.nutrition._id,
         menu_name: item.menu,
-        quantity: item.quantity,
+        quantity: item.quantity, 
       });
     });
 
     const query = {
-      "user_email":"ypark@test.com",
-      "menus":menu_array
+      "user_email":theuser,
+      "menus":menu_array,
+      "calories": calories,
     }
 
     fetch(`${url}/newcalcheck`, {
@@ -71,8 +75,8 @@ function FoodMenuList() {
     <div>
       <div className="mx-auto text-slate-950">
         <div className="flex flex-row justify-center gap-4 mx-auto p-4">
-        <h2 className="text-xl font-bold text-teal-500">MY MENU LIST</h2>
-        <button className="rounded-lg w-24 h-10 bg-teal-500 text-white" onClick={saveFoodList}> Save </button>
+        <h2 className="text-xl font-bold text-lime-500">MY MENU LIST</h2>
+        <button className="rounded-lg w-24 bg-lime-500 text-white" onClick={saveFoodList}> Save </button>
         </div>
         <div className="">
           <ul className="relative flex flex-row mx-auto gap-4 flex-wrap list-none p-4">

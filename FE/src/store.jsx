@@ -8,11 +8,13 @@
 import { configureStore } from '@reduxjs/toolkit'
 import counterReducer from './reducers/counterSlice'
 import menuReducer from './reducers/menuSlice'
+import userReducer from './reducers/userSlice'
 
 export const store = configureStore({
   reducer: {
     counter: counterReducer,
     menus: menuReducer,
+    users: userReducer,
   },
 })
 

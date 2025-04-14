@@ -12,6 +12,7 @@ import Home from './pages/Home'
 import Location from './pages/location'
 import MyFood from './pages/MyFood'
 import MyList from './pages/MyList'
+import Login from './pages/Login'
 
 import './App.css'
 
@@ -31,6 +32,7 @@ function App() {
           <Route path="/" element={<Location />} />          
           <Route path="/myfood" element={<MyFood />} />
           <Route path="/mylist" element={<MyList />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
         </div>
       </div>

@@ -63,7 +63,7 @@ export const FoodInput = () => {
         min="10"
         />
       <div className="content-center pr-3 mt-4 mb-4 text-gray-950 select-none">
-        <button type="submit" className="rounded-lg w-24 bg-teal-500 text-white" > Add </button>
+        <button type="submit" className="rounded-lg w-24 bg-lime-500 text-white" > Add </button>
       </div>
     </form>
   </div>

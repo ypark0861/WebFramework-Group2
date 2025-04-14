@@ -6,8 +6,11 @@
 
 import React, { useRef, useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-
+import { useNavigate } from 'react-router-dom';
+import { GoogleLogin, googleLogout } from "@react-oauth/google";
+import { useSelector, useDispatch } from 'react-redux';
+import { login, logout } from '../reducers/userSlice';
+import { Link } from 'react-router-dom'
 
 import "./navBar.css";
 
@@ -22,14 +25,38 @@ function NavBar() {
         }
     };
 
+    const navigate = useNavigate();
+    const theuser = useSelector((state) => state.users.user);
+    const dispatch = useDispatch();
+
+    function userLogout() {
+        dispatch(logout());
+        const userlogout = googleLogout();
+        console.log(userlogout);
+        navigate("/");
+    }
+
+    function UserStatus() {
+        if (theuser !== 'unknownuser') {
+            console.log(theuser)
+            return ([
+                <Link to="/myfood"><button>My Food</button></Link>,
+                <Link to="/mylist"><button>My List</button></Link>,
+                <button onClick={userLogout}>Logout</button>,
+            ])
+        } 
+        return <a href="/login">Login</a>
+    };
+
     return (
         <header>
-            <h3>Logo</h3>
+            <h3 href="/">HEALTHY CHOICE</h3>
             <nav ref={navRef} className={isNavVisible ? "responsive_nav" : ""}>
-                <a href="/">Home</a>
-                <a href="/myfood">MyFood</a>
-                <a href="/mylist">MyList</a>
-                <a href="/Login">Login</a>
+                <Link to="/" aria-current="page">
+                <button> Home</button>
+                </Link>
+                <UserStatus />
+
                 <button onClick={showNavBar} className="nav-btn nav-close-btn">
                     <FaTimes />
                 </button>

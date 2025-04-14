@@ -19,13 +19,19 @@ const Location = () => {
     const [restaurant, setRestaurant] = useState([]);
     const [loading, setLoading] = useState(true);
     const [searchPerformed, setSearchPerformed] = useState(false);
+    const GOOGLE_API = import.meta.env.VITE_GOOGLE_API;
 
     const handleSelect = async (city) => {
         setLoading(true);
         setSearchPerformed(true);
         try {
             const response = await fetch(
-                `https://maps.googleapis.com/maps/api/place/textsearch/json?query=restaurants+in+${city}&key=AIzaSyAPn8OGmsNM2Z849m-Q_BWGLhxPJbmt6J0`
+                `https://maps.googleapis.com/maps/api/place/textsearch/json?query=restaurants+in+${city}&key=${GOOGLE_API}`,
+                {
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                }
             );
 
             if (!response.ok) {
