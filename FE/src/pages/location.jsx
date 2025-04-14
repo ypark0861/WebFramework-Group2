@@ -11,7 +11,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import picture from './download.jpg';
 
-import NavBar from './navBar.jsx';
+import NavBar from './components/navBar.jsx';
 import RestaurantCard from './components/RestuarantCard';
 import SearchBar from './components/SearchBar';
 
