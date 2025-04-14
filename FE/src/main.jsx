@@ -4,16 +4,20 @@ import './index.css'
 import App from './App'
 import { store } from './store'
 import { Provider } from 'react-redux'
+import { GoogleOAuthProvider } from '@react-oauth/google'
 
 const container = document.getElementById('root')
-
+const CLIENT_ID = import.meta.env.VITE_CLIENT_ID;
 if (container) {
   const root = createRoot(container)
 
   root.render(
+    <GoogleOAuthProvider clientId={CLIENT_ID}>
     <Provider store={store}>
       <App />
-    </Provider>,
+    </Provider>
+    </GoogleOAuthProvider>
+    ,
   )
 } else {
   throw new Error(
