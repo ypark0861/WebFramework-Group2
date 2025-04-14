@@ -48,25 +48,22 @@ export const FoodInput = () => {
   }
   return (
   <div  className="justify-center">
-    <form action={submitFoodData} className="flex flex-row gap-4">
-      <div className="flex flex-row">
+    <form action={submitFoodData} className="flex xl:flex-row lg:flex-row md:flex-col sm:flex-col gap-4">
         <label htmlFor='menu' className="py-2 pr-3 pl-3 text-gray-950 select-none">{label_menu}</label>
         <input type="text" required minLength="3"
         className="py-2 pr-3 pl-3 text-gray-900 border border-gray-400 rounded-md"
         value={menuitem} 
         onChange={e => setMenuitem(e.target.value)} />
-      </div>
-      <div className="flex flex-row">
         <label htmlFor='menuqty' className="py-2 pr-3 pl-3 text-gray-950 select-none">{label_qty}</label>
         <input
         className="py-2 pr-3 pl-3 text-gray-900 border border-gray-400 rounded-md"
         value={itemqty}
         onChange={e => setItemqty(e.target.value)}
         type="number"
+        min="10"
         />
-      </div>
       <div className="content-center pr-3 mt-4 mb-4 text-gray-950 select-none">
-        <button type="submit" className="rounded-lg w-24 h-12 bg-teal-500 text-white" > Add </button>
+        <button type="submit" className="rounded-lg w-24 bg-teal-500 text-white" > Add </button>
       </div>
     </form>
   </div>
