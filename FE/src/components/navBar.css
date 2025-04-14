@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Montserrat", sans-serif;
+}
+navbar{
+    --maincolor: #040202;
+    --mainColorLight: #0051ff;
+    --secondaryColor: #ffffff;
+    --textColor: #000000;
+}
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+    background-color: var(--maincolor);
+    color: var(--secondaryColor);
+    position: fixed; /* Fix the navbar at the top */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Ensure it stays above other content */
+}
+
+nav {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+nav a{
+    margin: 0 2rem;
+    text-decoration: none;
+    color: var(--textColor);
+}
+
+nav a:hover{
+    color: var(--mainColorLight);
+}
+
+.responsive_nav {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--maincolor);
+    justify-content: center;
+    align-items: center;
+    transform: translateY(-100%);
+    transition: transform 0.3s ease-in-out;
+}
+
+.responsive_nav.active {
+    transform: translateY(0);
+}
+
+.nav-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: var(--textColor);
+}
+
+.nav-close-btn {
+    display: none;
+}
+
+@media (max-width: 1024px) {
+    .nav-btn {
+        display: block;
+    }
+
+    nav {
+        display: none;
+    }
+
+    .responsive_nav {
+        display: flex;
+    }
+
+    .nav-close-btn {
+        display: block;
+    }
+}
