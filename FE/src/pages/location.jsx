@@ -11,9 +11,9 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import picture from './download.jpg';
 
-import NavBar from './components/navBar.jsx';
-import RestaurantCard from './components/RestuarantCard';
-import SearchBar from './components/SearchBar';
+import NavBar from '../components/navBar.jsx';
+import RestaurantCard from '../components/RestaurantCard.jsx';
+import SearchBar from '../components/SearchBar.jsx';
 
 const Location = () => {
     const [restaurant, setRestaurant] = useState([]);
@@ -120,4 +120,4 @@ const Location = () => {
         </div>
     );
 };
-export default location;
+export default Location;

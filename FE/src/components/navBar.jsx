@@ -6,6 +6,9 @@
 
 import React, { useRef, useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+
+
 import "./navBar.css";
 
 function NavBar() {
@@ -23,10 +26,10 @@ function NavBar() {
         <header>
             <h3>Logo</h3>
             <nav ref={navRef} className={isNavVisible ? "responsive_nav" : ""}>
-                <a href="#home">Home</a>
-                <a href="#MyFood">MyFood</a>
-                <a href="#Resturant">Resturant</a>
-                <a href="#Login">Login</a>
+                <a href="/">Home</a>
+                <a href="/myfood">MyFood</a>
+                <a href="/mylist">MyList</a>
+                <a href="/Login">Login</a>
                 <button onClick={showNavBar} className="nav-btn nav-close-btn">
                     <FaTimes />
                 </button>
