@@ -4,17 +4,16 @@
  Navigation bar
 */
 
-
 import React, { useRef, useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import "./navBar.css";
 
 function NavBar() {
-    const navRef = useRef(null); 
-    const [isNavVisible, setIsNavVisible] = useState(false); 
+    const navRef = useRef(null); // Reference to the nav element
+    const [isNavVisible, setIsNavVisible] = useState(false); // State to track navbar visibility
 
     const showNavBar = () => {
-        setIsNavVisible(!isNavVisible); 
+        setIsNavVisible(!isNavVisible); // Toggle the visibility state
         if (navRef.current) {
             navRef.current.classList.toggle("responsive_nav");
         }
@@ -25,9 +24,9 @@ function NavBar() {
             <h3>Logo</h3>
             <nav ref={navRef} className={isNavVisible ? "responsive_nav" : ""}>
                 <a href="#home">Home</a>
-                <a href="#About">About</a>
-                <a href="#Services">Services</a>
-                <a href="#Location">Contact</a>
+                <a href="#MyFood">MyFood</a>
+                <a href="#Resturant">Resturant</a>
+                <a href="#Login">Login</a>
                 <button onClick={showNavBar} className="nav-btn nav-close-btn">
                     <FaTimes />
                 </button>
