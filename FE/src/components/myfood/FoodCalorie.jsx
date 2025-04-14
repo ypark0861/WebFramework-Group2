@@ -16,7 +16,7 @@ function FoodMenuList() {
   return (
     <div>
       <div className="mx-auto text-slate-950">
-        <h2 className="text-xl font-bold text-teal-500 pt-4">TOTAL CALORIES: {food_nutrition?.calories.toFixed(1)}</h2>
+        <h2 className="text-xl font-bold text-lime-500 pt-4">TOTAL CALORIES: {food_nutrition?.calories.toFixed(1)}</h2>
       </div>
     </div>
   )

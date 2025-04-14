@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import { GoogleLogin, googleLogout } from "@react-oauth/google";
 import { useSelector, useDispatch } from 'react-redux';
 import { login, logout } from '../reducers/userSlice';
+import { Link } from 'react-router-dom'
 
 import "./navBar.css";
 
@@ -36,11 +37,11 @@ function NavBar() {
     }
 
     function UserStatus() {
-        console.log(theuser)
         if (theuser !== 'unknownuser') {
+            console.log(theuser)
             return ([
-                <a href="/myfood">MyFood</a>,
-                <a href="/mylist">MyList</a>,
+                <Link to="/myfood"><button>My Food</button></Link>,
+                <Link to="/mylist"><button>My List</button></Link>,
                 <button onClick={userLogout}>Logout</button>,
             ])
         } 
@@ -51,10 +52,9 @@ function NavBar() {
         <header>
             <h3 href="/">HEALTHY CHOICE</h3>
             <nav ref={navRef} className={isNavVisible ? "responsive_nav" : ""}>
-                <a href="/">Home</a>                
-                {/* <a href="/myfood">MyFood</a>
-                <a href="/mylist">MyList</a>
-                <a href="/login">Login</a> */}
+                <Link to="/" aria-current="page">
+                <button> Home</button>
+                </Link>
                 <UserStatus />
 
                 <button onClick={showNavBar} className="nav-btn nav-close-btn">

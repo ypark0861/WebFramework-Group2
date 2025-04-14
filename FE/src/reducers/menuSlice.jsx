@@ -22,14 +22,14 @@ const menuSlice = createSlice({
       const {id, menu, quantity, nutrition} = action.payload
       state.allMenus.push({ id, menu, quantity, nutrition })
 
-      state.allNutrition.calories += nutrition.calories;
+      state.allNutrition.calories += nutrition.calories/100*quantity;
     },
     deleteMenu: (state, action) => {
       // state.allMenus = state.allMenus.filter(
       //   (item) => item.id !== action.payload.id
       // );
       console.log(action.payload);
-      state.allNutrition.calories -= action.payload.nutrition.calories;
+      state.allNutrition.calories -= action.payload.nutrition.calories/100*action.payload.quantity;
       const index = state.allMenus.findIndex((item) => item.id === action.payload.id);
       
       // console.log(index);      
