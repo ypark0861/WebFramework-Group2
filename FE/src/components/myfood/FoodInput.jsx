@@ -20,7 +20,7 @@ export const FoodInput = () => {
   const label_qty = 'Grams';
   
   const submitFoodData = () => {
-    fetch(`http://localhost:8080/hfood/food_nutrition/${menuitem}`) 
+    fetch(`${import.meta.env.VITE_API_URI}food_nutrition/${menuitem}`) 
     .then(response => {
       if (response.status !== 200) {
         throw new Error('Food not found in API')

@@ -11,7 +11,7 @@ import FoodCard from './FoodCard';
 import { deleteAllMenu } from '../../reducers/menuSlice'
 
 function FoodMenuList() {
-  const url = 'http://localhost:8080/hfood';
+  const url = `${import.meta.env.VITE_API_URI}`;
   const dispatch = useDispatch();
   const menulist = useSelector((state) => state.menus.allMenus);
   const theuser = useSelector((state) => state.users.user);

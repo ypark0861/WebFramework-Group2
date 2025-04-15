@@ -25,14 +25,14 @@ const MyList = () => {
     const getFoodList = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8080/hfood/calcheckbyuser/${user_email}`
+          `${import.meta.env.VITE_API_URI}calcheckbyuser/${user_email}`
         );
         if (!response.ok) {
           throw new Error(`ERROR: ${response.status}`);
         }
         let response_data = await response.json();
         setData(response_data);
-        console.log(data);
+        // console.log(data);
         // dispatch(addSavedMenuList(data));
         dispatch(addSavedMenuList(response_data));
         

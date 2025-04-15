@@ -12,7 +12,7 @@ function CalorieCard(props) {
 
   const removeCalCheck = () => {
     console.log(props.item._id); //_id
-    fetch(`http://localhost:8080/hfood/deletecalcheck/${props.item._id}`, { method: 'DELETE' })
+    fetch(`${import.meta.env.VITE_API_URI}deletecalcheck/${props.item._id}`, { method: 'DELETE' })
     .then(response => {
       if (response.status !== 200) {
         throw new Error('ERROR-deleting calrorie check card')
@@ -24,7 +24,7 @@ function CalorieCard(props) {
   const getFoodList = async () => {
     try {
       const response = await fetch(
-        `http://localhost:8080/hfood/calcheckbyuser/${user_email}`
+        `${import.meta.env.VITE_API_URI}calcheckbyuser/${user_email}`
       );
       if (!response.ok) {
         throw new Error(`ERROR: ${response.status}`);

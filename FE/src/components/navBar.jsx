@@ -55,6 +55,9 @@ function NavBar() {
                 <Link to="/" aria-current="page">
                 <button> Home</button>
                 </Link>
+                <Link to="/location">
+                <button>Restaurant</button>
+                </Link>
                 <UserStatus />
 
                 <button onClick={showNavBar} className="nav-btn nav-close-btn">
